@@ -17,8 +17,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('*', function(req, res){
 	console.log(req.headers);
+	console.log('** IP:',  req.connection.remoteAddress);
+
 	res.send({
-		ipaddress: req.headers.host.split(':')[0],
+		ipaddress: req.connection.remoteAddress.split(':')[3],
 		language: req.headers['accept-language'].split(',')[0],
 		software: req.headers['user-agent'].split(/\s*[;)(]\s*/)[1]
 			+ '; ' + req.headers['user-agent'].split(/\s*[;)(]\s*/)[2]
